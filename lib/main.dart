@@ -26,19 +26,6 @@ class _NightVisionState extends State<NightVision> {
   bool nightVisonMode = false;
   bool automaticmode = false;
 
-  String currentselectedtime = "10:15";
-  String AMorPMstartime = "AM";
-  String AMorPMendime = "AM";
-  var selectedcolor = Colors.grey.shade400;
-  var selectedbordercolor = Colors.white;
-
-  List<bool> isSelected = List<bool>.filled(7, false);
-
-  List<String> days = ["M", "Tu", "W", "Th", "F", "Sa", "Su"];
-
-  List<Color> SelectedColor = List<Color>.filled(7, Colors.grey.shade400);
-  List<Color> SelectedborderColor = List<Color>.filled(7, Colors.white);
-
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
 
@@ -48,9 +35,11 @@ class _NightVisionState extends State<NightVision> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          leading : CircleAvatar(backgroundColor: Colors.white,child: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios),color: Colors.black,)),
           title: const Text(
             "Night Vision",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)
+            ,
           ),
           backgroundColor: Colors.white,
           elevation: 0,
@@ -64,23 +53,23 @@ class _NightVisionState extends State<NightVision> {
                 height: 20,
               ),
               Container(
-                margin: const EdgeInsets.only(left: 30),
+                margin: const EdgeInsets.only(left: 20),
                 height: 70,
-                width: 350,
+                width: 370,
                 decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[200],
                     boxShadow: <BoxShadow>[
                       BoxShadow(
                           offset: Offset(0, 5),
-                          color: Colors.grey.shade500,
-                          blurRadius: 7)
+                          color: Colors.grey.shade400,
+                          blurRadius: 0)
                     ],
                     borderRadius: BorderRadius.circular(10)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const SizedBox(
-                      width: 5,
+                      width: 0.5,
                     ),
                     const Text(
                       "Night Vision Mode",
@@ -91,7 +80,7 @@ class _NightVisionState extends State<NightVision> {
                       width: 80,
                     ),
                     Switch(
-                      activeTrackColor: Colors.white,
+                      activeTrackColor: Colors.green.shade800,
                       splashRadius: 10,
                       value: nightVisonMode,
                       onChanged: (val) {
@@ -99,7 +88,7 @@ class _NightVisionState extends State<NightVision> {
                           nightVisonMode = !nightVisonMode;
                         });
                       },
-                      activeColor: Colors.green,
+                      activeColor: Colors.white,
                       inactiveTrackColor: Colors.grey,
                     ),
                     // const SizedBox(width: 20,),
@@ -107,16 +96,16 @@ class _NightVisionState extends State<NightVision> {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 30,
               ),
               SchedulerWidget(),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Container(
-                margin: const EdgeInsets.only(left: 30),
+                margin: const EdgeInsets.only(left: 20),
                 height: 70,
-                width: 350,
+                width: 370,
                 decoration: BoxDecoration(
                     color: Colors.grey[300],
                     boxShadow: <BoxShadow>[
@@ -142,23 +131,23 @@ class _NightVisionState extends State<NightVision> {
                     ),
                     Switch(
                       splashRadius: 10,
-                      activeTrackColor: Colors.white,
+                      activeTrackColor: Colors.green.shade800,
                       value: automaticmode,
                       onChanged: (val) {
                         setState(() {
                           automaticmode = !automaticmode;
                         });
                       },
-                      activeColor: Colors.green,
+                      activeColor: Colors.white,
                       inactiveTrackColor: Colors.grey,
                     ),
                   ],
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 80,
               ),
-              SaveButton()
+              SaveButton(color: Colors.green)
             ],
           ),
         ),

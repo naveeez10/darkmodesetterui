@@ -20,7 +20,8 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
   List<String> days = ["M", "Tu", "W", "Th", "F", "Sa", "Su"];
 
   List<Color> SelectedColor = List<Color>.filled(7, Colors.grey.shade400);
-  List<Color> SelectedborderColor = List<Color>.filled(7, Colors.white);
+  List<Color> SelectedborderColor = List<Color>.filled(7, Colors.grey.shade400);
+  List<Color> SelectedTextColor = List<Color>.filled(7, Colors.black);
 
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
@@ -28,16 +29,16 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 30),
+      margin: const EdgeInsets.only(left: 20),
       height: 400,
-      width: 350,
+      width: 370,
       decoration: BoxDecoration(
-          color: Colors.grey[300],
+          color: Colors.grey[200],
           boxShadow: <BoxShadow>[
             BoxShadow(
                 offset: Offset(0, 5),
-                color: Colors.grey.shade500,
-                blurRadius: 7)
+                color: Colors.grey.shade400,
+                blurRadius: 0)
           ],
           borderRadius: BorderRadius.circular(10)),
       child: Column(
@@ -46,27 +47,30 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
         children: [
           Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const SizedBox(width: 3),
                 const Text(
                   "Schedule Night Mode",
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   width: 40,
                 ),
-                Switch(
-                  // splashRadius: 10,
-                  activeTrackColor: Colors.white,
-                  value: schedulenightmode,
-                  onChanged: (val) {
-                    setState(() {
-                      schedulenightmode = !schedulenightmode;
-                    });
-                  },
-                  activeColor: Colors.green,
-                  inactiveTrackColor: Colors.grey,
+                Container(
+                  margin: const EdgeInsets.only(right: 14),
+                  child: Switch(
+                    // splashRadius: 10,
+                    activeTrackColor: Colors.green.shade800,
+                    value: schedulenightmode,
+                    onChanged: (val) {
+                      setState(() {
+                        schedulenightmode = !schedulenightmode;
+                      });
+                    },
+                    activeColor: Colors.white,
+                    inactiveTrackColor: Colors.grey,
+                  ),
                 ),
               ],
             ),
@@ -76,7 +80,7 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.only(left: 18),
+                padding: const EdgeInsets.only(left: 30),
                 child: const Text(
                   "Start Time",
                   style: TextStyle(
@@ -91,7 +95,7 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                 height: 10,
               ),
               Container(
-                margin: EdgeInsets.only(left: 18),
+                margin: const EdgeInsets.only(left: 27),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(7)),
@@ -103,15 +107,28 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                       child: TextFormField(
                         controller: startTimeController,
                         cursorHeight: 27,
-                        decoration: const InputDecoration(
-                            border: InputBorder.none),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
                       ),
                     ),
+                    const SizedBox(
+                      width: 3,
+                    ),
                     DropdownButton(
-                        hint: Text(AMorPMstartime),
+                        hint: Text(
+                          AMorPMstartime,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, color: Colors.black),
+                        ),
                         iconSize: 40,
-                        items:
-                        <String>['AM', 'PM'].map((String value) {
+                        iconEnabledColor: Colors.black,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600, color: Colors.black),
+                        items: <String>['AM', 'PM'].map((String value) {
                           return DropdownMenuItem<String>(
                               value: value, child: Text(value));
                         }).toList(),
@@ -127,7 +144,7 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                 height: 15,
               ),
               Container(
-                padding: EdgeInsets.only(left: 18),
+                padding: EdgeInsets.only(left: 30),
                 child: const Text(
                   "End Time",
                   style: TextStyle(
@@ -142,7 +159,7 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                 height: 15,
               ),
               Container(
-                margin: EdgeInsets.only(left: 18),
+                margin: EdgeInsets.only(left: 30),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(7)),
@@ -154,15 +171,26 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                       child: TextFormField(
                         controller: endTimeController,
                         cursorHeight: 27,
-                        decoration: const InputDecoration(
-                            border: InputBorder.none),
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600
+                        ),
                       ),
                     ),
+                    const SizedBox(
+                      width: 3,
+                    ),
                     DropdownButton(
-                        hint: Text(AMorPMendime),
+                        hint: Text(
+                          AMorPMendime,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, color: Colors.black),
+                        ),
                         iconSize: 40,
-                        items:
-                        <String>['AM', 'PM'].map((String value) {
+                        iconEnabledColor: Colors.black,
+                        items: <String>['AM', 'PM'].map((String value) {
                           return DropdownMenuItem<String>(
                               value: value, child: Text(value));
                         }).toList(),
@@ -178,7 +206,7 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                 height: 15,
               ),
               Container(
-                padding: EdgeInsets.only(left: 18),
+                padding: EdgeInsets.only(left: 30),
                 child: const Text(
                   "Days to Repeat",
                   style: TextStyle(
@@ -197,234 +225,248 @@ class _SchedulerWidgetState extends State<SchedulerWidget> {
                 height: 60,
                 child: Center(
                   child: Container(
-                    margin: EdgeInsets.only(left: 7),
+                    margin: EdgeInsets.only(left: 16),
                     child: ListView(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[0] == false) {
-                                isSelected[0] = true;
-                                SelectedborderColor[0] = Colors.green;
-                                SelectedColor[0] = Colors.white;
-                              }
-                              else {
-                                isSelected[0] = false;
-                                SelectedborderColor[0] = Colors.white;
-                                SelectedColor[0] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[0],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[0] == false) {
+                                    isSelected[0] = true;
+                                    SelectedborderColor[0] = Colors.green;
+                                    SelectedColor[0] = Colors.white;
+                                    SelectedTextColor[0] = Colors.green;
+                                  } else {
+                                    isSelected[0] = false;
+                                    SelectedborderColor[0] = Colors.grey.shade400;
+                                    SelectedColor[0] = Colors.grey.shade400;
+                                    SelectedTextColor[0] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "M",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[0],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "M",
+                                    style: TextStyle(color: SelectedTextColor[0],fontSize: 14),
+                                  ),
+                                  backgroundColor: SelectedColor[0],
                                 ),
-                                backgroundColor: SelectedColor[0],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 20),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[1] == false) {
-                                isSelected[1] = true;
-                                SelectedborderColor[1] = Colors.green;
-                                SelectedColor[1] = Colors.white;
-                              }
-                              else {
-                                isSelected[1] = false;
-                                SelectedborderColor[1] = Colors.white;
-                                SelectedColor[1] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[1],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[1] == false) {
+                                    isSelected[1] = true;
+                                    SelectedborderColor[1] = Colors.green;
+                                    SelectedColor[1] = Colors.white;
+                                    SelectedTextColor[1] = Colors.green;
+                                  } else {
+                                    isSelected[1] = false;
+                                    SelectedborderColor[1] = Colors.grey.shade400;
+                                    SelectedColor[1] = Colors.grey.shade400;
+                                    SelectedTextColor[1] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "Tu",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[1],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "Tu",
+                                    style: TextStyle(color: SelectedTextColor[1],fontSize: 14),
+                                  ),
+                                  backgroundColor: SelectedColor[1],
                                 ),
-                                backgroundColor: SelectedColor[1],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 20),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[2] == false) {
-                                isSelected[2] = true;
-                                SelectedborderColor[2] = Colors.green;
-                                SelectedColor[2] = Colors.white;
-                              }
-                              else {
-                                isSelected[2] = false;
-                                SelectedborderColor[2] = Colors.white;
-                                SelectedColor[2] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[2],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[2] == false) {
+                                    isSelected[2] = true;
+                                    SelectedborderColor[2] = Colors.green;
+                                    SelectedColor[2] = Colors.white;
+                                    SelectedTextColor[2] = Colors.green;
+                                  } else {
+                                    isSelected[2] = false;
+                                    SelectedborderColor[2] = Colors.grey.shade400;
+                                    SelectedColor[2] = Colors.grey.shade400;
+                                    SelectedTextColor[2] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "W",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[2],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "W",
+                                    style: TextStyle(color: SelectedTextColor[2],fontSize: 14)
+                                  ),
+                                  backgroundColor: SelectedColor[2],
                                 ),
-                                backgroundColor: SelectedColor[2],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 20),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[3] == false) {
-                                isSelected[3] = true;
-                                SelectedborderColor[3] = Colors.green;
-                                SelectedColor[3] = Colors.white;
-                              }
-                              else {
-                                isSelected[3] = false;
-                                SelectedborderColor[3] = Colors.white;
-                                SelectedColor[3] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[3],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[3] == false) {
+                                    isSelected[3] = true;
+                                    SelectedborderColor[3] = Colors.green;
+                                    SelectedColor[3] = Colors.white;
+                                    SelectedTextColor[3] = Colors.green;
+                                  } else {
+                                    isSelected[3] = false;
+                                    SelectedborderColor[3] = Colors.grey.shade400;
+                                    SelectedColor[3] = Colors.grey.shade400;
+                                    SelectedTextColor[3] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "Th",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[3],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "Th",
+                                    style: TextStyle(color: SelectedTextColor[3],fontSize: 14),
+                                  ),
+                                  backgroundColor: SelectedColor[3],
                                 ),
-                                backgroundColor: SelectedColor[3],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 20),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[4] == false) {
-                                isSelected[4] = true;
-                                SelectedborderColor[4] = Colors.green;
-                                SelectedColor[4] = Colors.white;
-                              }
-                              else {
-                                isSelected[4] = false;
-                                SelectedborderColor[4] = Colors.white;
-                                SelectedColor[4] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[4],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[0] == false) {
+                                    isSelected[0] = true;
+                                    SelectedborderColor[0] = Colors.green;
+                                    SelectedColor[0] = Colors.white;
+                                    SelectedTextColor[0] = Colors.green;
+                                  } else {
+                                    isSelected[0] = false;
+                                    SelectedborderColor[0] = Colors.grey.shade400;
+                                    SelectedColor[0] = Colors.grey.shade400;
+                                    SelectedTextColor[0] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "F",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[0],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "F",
+                                    style: TextStyle(color: SelectedTextColor[0],fontSize: 14),
+                                  ),
+                                  backgroundColor: SelectedColor[0],
                                 ),
-                                backgroundColor: SelectedColor[4],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 20),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[5] == false) {
-                                isSelected[5] = true;
-                                SelectedborderColor[5] = Colors.green;
-                                SelectedColor[0] = Colors.white;
-                              }
-                              else {
-                                isSelected[5] = false;
-                                SelectedborderColor[5] = Colors.white;
-                                SelectedColor[5] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[5],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[5] == false) {
+                                    isSelected[5] = true;
+                                    SelectedborderColor[5] = Colors.green;
+                                    SelectedColor[5] = Colors.white;
+                                    SelectedTextColor[5] = Colors.green;
+                                  } else {
+                                    isSelected[5] = false;
+                                    SelectedborderColor[5] = Colors.grey.shade400;
+                                    SelectedColor[5] = Colors.grey.shade400;
+                                    SelectedTextColor[5] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "Sa",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[5],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "Sa",
+                                    style: TextStyle(color: SelectedTextColor[5],fontSize: 14),
+                                  ),
+                                  backgroundColor: SelectedColor[5],
                                 ),
-                                backgroundColor: SelectedColor[5],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 20),
+                          ],
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if(isSelected[6] == false) {
-                                isSelected[6] = true;
-                                SelectedborderColor[6] = Colors.green;
-                                SelectedColor[6] = Colors.white;
-                              }
-                              else {
-                                isSelected[6] = false;
-                                SelectedborderColor[6] = Colors.white;
-                                SelectedColor[6] = Colors.grey.shade400;
-                              }
-                            });
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            radius: 22,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: SelectedborderColor[6],
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected[6] == false) {
+                                    isSelected[6] = true;
+                                    SelectedborderColor[6] = Colors.green;
+                                    SelectedColor[6] = Colors.white;
+                                    SelectedTextColor[6] = Colors.green;
+                                  } else {
+                                    isSelected[6] = false;
+                                    SelectedborderColor[6] = Colors.grey.shade400;
+                                    SelectedColor[6] = Colors.grey.shade400;
+                                    SelectedTextColor[6] = Colors.black;
+                                  }
+                                });
+                              },
                               child: CircleAvatar(
-                                radius: 16,
-                                child: const Text(
-                                  "Su",
-                                  style: TextStyle(color: Colors.black),
+                                radius: 15,
+                                backgroundColor: SelectedborderColor[6],
+                                child: CircleAvatar(
+                                  radius: 13,
+                                  child: Text(
+                                    "Su",
+                                    style: TextStyle(color: SelectedTextColor[6],fontSize: 14),
+                                  ),
+                                  backgroundColor: SelectedColor[6],
                                 ),
-                                backgroundColor: SelectedColor[6],
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 30),
+                          ],
                         ),
                       ],
                     ),
